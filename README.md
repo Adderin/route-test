@@ -1,11 +1,17 @@
 ## Route test
 
-<sub><sup>
+To run the application you need JDK 11 or higher
+
+Instructions:
+1) Run RoutingApplication
+2) Send a GET request or curl to http://localhost:8181/routing/{origin}/{destination} substituting the two latter with countries you want tot connect
+3) In case there is no land connection you will get a HTTP status 400
+
+```
+Description:
 Your task is to create a simple Spring Boot service, that is able to calculate any possible land
 route from one country to another. The objective is to take a list of country data in JSON format
 and calculate the route by utilizing individual countries border information. 
-</sup></sub>
-```
 Specifications:
 
 * Spring Boot, Maven
@@ -31,10 +37,3 @@ returns a list of border crossings to get from origin to destination
 "route": ["CZE", "AUT", "ITA"]
 }
 ```
-To run the application you need JDK 11 or higher
-
-Instructions:
-1) Run RoutingApplication
-2) Send a GET request or curl to http://localhost:8181/routing/{origin}/{destination} substituting the two latter with countries you want tot connect
-3) In case there is no land connection you will get a HTTP status 400
- 
