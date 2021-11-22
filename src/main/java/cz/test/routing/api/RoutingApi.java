@@ -1,6 +1,6 @@
 package cz.test.routing.api;
 
-import cz.test.routing.api.response.RoutePathResponse;
+import cz.test.routing.api.response.RoutingResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -39,5 +39,5 @@ public interface RoutingApi {
             @ApiResponse(responseCode = "400", description = "No route found"),
             @ApiResponse(responseCode = "405", description = "Invalid input")
     })
-    RoutePathResponse routeCheck(@PathVariable String origin, @PathVariable String destination);
+    RoutingResponse routeCheck(@PathVariable String origin, @PathVariable String destination);
 }

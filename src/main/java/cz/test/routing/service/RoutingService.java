@@ -1,6 +1,6 @@
 package cz.test.routing.service;
 
-import cz.test.routing.api.response.RoutePathResponse;
+import cz.test.routing.api.response.RoutingResponse;
 import cz.test.routing.cache.CountryCache;
 import cz.test.routing.exception.RoutingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class RoutingService {
         this.countryCache = countryCache;
     }
 
-    public RoutePathResponse findOptimalRoutePath(String origin, String destination) {
+    public RoutingResponse findOptimalRoutePath(final String origin, final String destination) {
         if (countryCache.requireCacheUpdate()) {
             countryCache.updateCache();
         }
@@ -29,12 +29,12 @@ public class RoutingService {
     }
 
     static class Node {
-        String countryName;
-        List<Node> neighbors;
-        boolean visited = false;
-        Node prev = null;
+        private final String countryName;
+        private List<Node> neighbors;
+        private boolean visited = false;
+        private Node prev = null;
 
-        Node(String countryName) {
+        Node(final String countryName) {
             this.countryName = countryName;
             this.neighbors = new ArrayList<>();
         }
@@ -47,12 +47,12 @@ public class RoutingService {
     class ShortestPath {
         Node start, end;
 
-        ShortestPath(Node start, Node end) {
+        ShortestPath(final Node start, final Node end) {
             this.start = start;
             this.end = end;
         }
 
-        public RoutePathResponse filterToRegions() {
+        public RoutingResponse filterToRegions() {
             var regions = countryCache.getRegionsMap();
             var requiredRegion = regions.keySet().stream()
                     .filter(r -> regions.get(r).containsKey(start.getCountryName()))
@@ -64,7 +64,7 @@ public class RoutingService {
             return searchForRoute();
         }
 
-        public RoutePathResponse searchForRoute() {
+        public RoutingResponse searchForRoute() {
             Queue<Node> queue = new LinkedList<>();
 
             start.visited = true;
@@ -91,11 +91,11 @@ public class RoutingService {
                     }
                 }
             }
-            return new RoutePathResponse();
+            return new RoutingResponse();
         }
 
-        private RoutePathResponse traceRoute(Node node) {
-            RoutePathResponse routePathResponse = new RoutePathResponse();
+        private RoutingResponse traceRoute(Node node) {
+            RoutingResponse routingResponse = new RoutingResponse();
             List<String> route = new ArrayList<>();
 
             while (node != null) {
@@ -103,8 +103,8 @@ public class RoutingService {
                 node = node.prev;
             }
             Collections.reverse(route);
-            routePathResponse.setRoute(route);
-            return routePathResponse;
+            routingResponse.setRoute(route);
+            return routingResponse;
         }
     }
 }

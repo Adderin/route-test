@@ -16,11 +16,11 @@ public class CountryCache implements Cacheable {
     private static final String LONELY_COUNTRY = "LonelyCountry";
     private final CountrySourceClient countrySourceClient;
     private Map<String, List<String>> countryGraph = new HashMap<>();
-    private Map<String, Map<String, List<String>>> regionsMap = new HashMap<>();
+    private final Map<String, Map<String, List<String>>> regionsMap = new HashMap<>();
 
 
     @Autowired
-    public CountryCache(CountrySourceClient countrySourceClient) {
+    public CountryCache(final CountrySourceClient countrySourceClient) {
         this.countrySourceClient = countrySourceClient;
     }
 
@@ -36,7 +36,7 @@ public class CountryCache implements Cacheable {
     @Override
     public void updateCache() {
         if (requireCacheUpdate()) {
-            var countryBorders = countrySourceClient.getCountryBorders();
+            var countryBorders = countrySourceClient.getCountryList();
 
             for (Country country : countryBorders) {
 

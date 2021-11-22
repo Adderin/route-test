@@ -16,6 +16,6 @@ public interface CountrySourceClient {
         method = RequestMethod.GET
     )
     @ResponseBody
-    List<Country> getCountryBorders();
+    List<Country> getCountryList();
 
 }

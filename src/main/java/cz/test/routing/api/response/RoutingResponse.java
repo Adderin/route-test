@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
+import java.util.Objects;
 
-@Schema(name = "RoutePathResponse", description = "Routing response")
+@Schema(name = "RoutingResponse", description = "Routing response")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RoutePathResponse {
+public class RoutingResponse {
 
     @JsonFormat
     @Schema(description = "route", example = "CZE, AUT, ITA")
@@ -20,5 +21,18 @@ public class RoutePathResponse {
 
     public void setRoute(List<String> route) {
         this.route = route;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoutingResponse that = (RoutingResponse) o;
+        return Objects.equals(route, that.route);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(route);
     }
 }
