@@ -12,6 +12,11 @@ logging:
     cz:
       test:
         routing: trace
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
 
 #data url
 countries:

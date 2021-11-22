@@ -10,7 +10,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RoutePathResponse {
 
-    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    @JsonFormat
     @Schema(description = "route", example = "CZE, AUT, ITA")
     List<String> route;
 
