@@ -10,9 +10,9 @@
         <!-- lookup parent from repository -->
     </parent>
     <groupId>cz.test</groupId>
-    <artifactId>routing</artifactId>
+    <artifactId>route-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>routing</name>
+    <name>route-test</name>
     <description>Test project</description>
     <properties>
         <java.version>11</java.version>
