@@ -4,14 +4,19 @@ import cz.test.routing.cache.client.CountrySourceClient;
 import cz.test.routing.cache.model.Country;
 import cz.test.routing.cache.model.RegionEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 
 @Component
-public class CountryCache implements Cacheable {
+@CacheConfig(cacheNames={"requireCacheUpdate", "updateCache" })
+public class CountryCache {
 
     private static final String LONELY_COUNTRY = "LonelyCountry";
     private final CountrySourceClient countrySourceClient;
@@ -28,12 +33,12 @@ public class CountryCache implements Cacheable {
         return countryGraph;
     }
 
-    @Override
+    @Cacheable
     public boolean requireCacheUpdate() {
         return regionsMap.isEmpty() && countryGraph.isEmpty();
     }
 
-    @Override
+    @Cacheable
     public void updateCache() {
         if (requireCacheUpdate()) {
             var countryBorders = countrySourceClient.getCountryList();
