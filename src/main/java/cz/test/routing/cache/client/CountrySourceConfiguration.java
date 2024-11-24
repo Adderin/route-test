@@ -12,5 +12,4 @@ public class CountrySourceConfiguration {
     public Decoder decoder() {
         return new GsonDecoder();
     }
-
 }

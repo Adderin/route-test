@@ -3,6 +3,7 @@ package cz.test.routing.service;
 import cz.test.routing.api.response.RoutingResponse;
 import cz.test.routing.cache.CountryCache;
 import cz.test.routing.exception.RoutingException;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class RoutingService {
     }
 
     static class Node {
+        @Getter
         private final String countryName;
         private List<Node> neighbors;
         private boolean visited = false;
@@ -39,9 +41,6 @@ public class RoutingService {
             this.neighbors = new ArrayList<>();
         }
 
-        public String getCountryName() {
-            return this.countryName;
-        }
     }
 
     class ShortestPath {
