@@ -1,6 +1,6 @@
 ## Route test
 
-To run the application you need JDK 11 or higher
+To run the application you need JDK 21 or higher
 
 Instructions:
 1) Run RoutingApplication
